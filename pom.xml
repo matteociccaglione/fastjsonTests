@@ -17,13 +17,39 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
+            <version>1.2.79</version>
+            <scope>system</scope>
+            <systemPath>/home/utente/Scaricati/EsempiJacocoFastJSON/fat-jar/fastjson-1.2.79-fat.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <classifier>runtime</classifier>
+            <version>0.8.5</version>
         </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
-
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.5</version>
+            <executions>
+                <!-- NOTE THAT AUTOMATIC REPORTING IS USELESS, AS THE SOURCE FILES OF FastJSON ARE NEEDED: -->
+                <!-- GENERATE THE REPORTS OFFLINE AS DESCRIBED IN  jacocolibSnippets.txt -->
+                <execution>
+                    <id>TheExecutionId</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+    </build>
     
 </project>

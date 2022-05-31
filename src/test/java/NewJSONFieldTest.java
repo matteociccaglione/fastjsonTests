@@ -8,22 +8,19 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-@RunWith(Parameterized.class)
+
 public class NewJSONFieldTest {
     private String expectedResult;
     private Integer id;
-    public NewJSONFieldTest(String expectedResult, Integer id){
+    public NewJSONFieldTest(){
+        configure("{\"id\":1001}",1001);
+        //configure("{\"id\":1234}", 1234);
+        //configure("{\"id\":1467}", 1467);
+        //configure("{\"id\":1}", 1);
+    }
+    private void configure(String expectedResult, Integer id){
         this.expectedResult = expectedResult;
         this.id = id;
-    }
-    @Parameterized.Parameters
-    public static Collection configure() {
-        return Arrays.asList(new Object[][]{
-                {"{\"id\":1001}", 1001},
-                {"{\"id\":1234}", 1234},
-                {"{\"id\":1467}", 1467},
-                {"{\"id\":1}", 1}
-        });
     }
     @Test
     public void test_jsonField() throws Exception {
