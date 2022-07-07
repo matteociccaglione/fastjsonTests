@@ -16,7 +16,6 @@ public class NewOrderedFieldTest {
         configure("{\"id\":1001}",1001);
         //configure("",1234);
         //configure(null,1234);
-        //configure("{\"id\":"ciao"}","ciao");
     }
     private void configure(String inputText, Object expectedId){
         this.inputText=inputText;
