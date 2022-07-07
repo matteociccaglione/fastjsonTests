@@ -18,8 +18,7 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.79</version>
-            <scope>system</scope>
-            <systemPath>/home/utente/Scaricati/EsempiJacocoFastJSON/fat-jar/fastjson-1.2.79-fat.jar</systemPath>
+
         </dependency>
         <dependency>
             <groupId>org.jacoco</groupId>
@@ -46,6 +45,56 @@
                     <goals>
                         <goal>prepare-agent</goal>
                     </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+                <execution>
+                    <id>make jacoco directory</id>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                    <configuration>
+                        <workingDirectory>${project.basedir}</workingDirectory>
+                        <executable>mkdir</executable>
+                        <arguments>
+                            <argument>-p</argument>
+                            <argument>target/site/jacoco</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+
+                <execution>
+                    <id>creating reports</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                    <configuration>
+                        <workingDirectory>${project.basedir}</workingDirectory>
+                        <executable>java</executable>
+                        <arguments>
+                            <argument>-jar</argument>
+                            <argument>./jar/jacoco/jacococli.jar</argument>
+                            <argument>report</argument>
+                            <argument>./target/jacoco.exec</argument>
+                            <argument>--classfiles</argument>
+                            <argument>./jar/fastjson-1.2.79.jar</argument>
+                            <argument>--sourcefiles</argument>
+                            <argument>./src/test/java</argument>
+                            <argument>--html</argument>
+                            <argument>target/site/jacoco</argument>
+                            <argument>--xml</argument>
+                            <argument>target/site/jacoco/jacoco.xml</argument>
+                            <argument>--csv</argument>
+                            <argument>target/site/jacoco/jacoco.csv</argument>
+                        </arguments>
+                    </configuration>
                 </execution>
             </executions>
         </plugin>
